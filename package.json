@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "forever start .",
+    "stop": "forever stop .",
+    "stat": "forever list",
     "test": "echo \"Error: no test specified\""
   },
   "license": "MIT",
@@ -13,6 +16,7 @@
   "homepage": "https://github.com/amio/nace#readme",
   "dependencies": {
     "connect": "^3.4.1",
+    "forever": "^0.15.2",
     "morgan": "^1.7.0"
   }
 }
