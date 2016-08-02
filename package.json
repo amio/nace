@@ -17,6 +17,7 @@
   "dependencies": {
     "connect": "^3.4.1",
     "forever": "^0.15.2",
+    "minimist": "^1.2.0",
     "morgan": "^1.7.0"
   },
   "engines": {
