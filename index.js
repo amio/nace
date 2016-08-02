@@ -1,36 +1,28 @@
-var connect = require('connect');
-var morgan = require('morgan');
-var http = require('http');
-var path = require('path');
-var fs = require('fs');
+const connect = require('connect')
+const morgan = require('morgan')
+const http = require('http')
+const path = require('path')
+const fs = require('fs')
 
-var logfile = path.join(__dirname, 'access.log')
-var app = connect();
-
-// create a write stream (in append mode)
-var accessLogStream = fs.createWriteStream(logfile, {flags: 'a'})
+var app = connect()
 
 // setup the logger
-app.use(morgan('combined', {stream: accessLogStream}))
-
-// gzip/deflate outgoing responses
-// var compression = require('compression');
-// app.use(compression());
-
-// store session state in browser cookie
-// var cookieSession = require('cookie-session');
-// app.use(cookieSession({
-//     keys: ['secret1', 'secret2']
-// }));
-
-// parse urlencoded request bodies into req.body
-// var bodyParser = require('body-parser');
-// app.use(bodyParser.urlencoded());
-
-// respond to all requests
-app.use(function(req, res){
-  res.end('Hey!');
-});
+app.use(morgan('combined', {
+  immediate: true,
+  stream: (new AccessLog).stream
+}))
+app.use(function(req, res){ res.end() })
 
 //create node.js http server and listen on port
-http.createServer(app).listen(3300);
+http.createServer(app).listen(3300)
+
+function AccessLog () {
+  const that = this
+  function updateAccessLogStream () {
+    const timestamp = (new Date).toISOString().replace(/T.*/, '')
+    const logfile = path.join(__dirname, `access-${timestamp}.log`)
+    that.stream = fs.createWriteStream(logfile, {flags: 'a'})
+  }
+  setInterval(updateAccessLogStream, 60000)
+  updateAccessLogStream()
+}
