@@ -1,0 +1,5 @@
+{
+    "uid": "nace",
+    "append": true,
+    "script": "index.js"
+}

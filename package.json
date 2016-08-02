@@ -4,9 +4,9 @@
   "description": "node access logger.",
   "main": "index.js",
   "scripts": {
-    "start": "forever start .",
-    "stop": "forever stop .",
-    "stat": "forever list",
+    "fe": "forever",
+    "start": "forever start --minUptime 2000 --spinSleepTime 3000 forever.json",
+    "stop": "forever stop nace",
     "test": "echo \"Error: no test specified\""
   },
   "license": "MIT",

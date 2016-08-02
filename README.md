@@ -12,4 +12,7 @@ $ npm start
 
 # stop
 $ npm stop
+
+# check server state through forever
+$ npm run fe -- list
 ```
