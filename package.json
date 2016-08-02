@@ -1,6 +1,6 @@
 {
   "name": "nace",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "node access logger.",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "forever": "^0.15.2",
     "morgan": "^1.7.0"
   },
-  "engines" : {
-    "node" : ">=4.0.0"
+  "engines": {
+    "node": ">=4.0.0"
   }
 }
