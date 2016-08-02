@@ -1,7 +1,7 @@
 {
   "name": "nace",
   "version": "0.1.0",
-  "description": "",
+  "description": "node access logger.",
   "main": "index.js",
   "scripts": {
     "start": "forever start .",
@@ -12,8 +12,8 @@
   "license": "MIT",
   "repository": "amio/nace",
   "author": "Amio <amio.cn@gmail.com>",
-  "bugs": "https://github.com/amio/nace/issues",
   "homepage": "https://github.com/amio/nace#readme",
+  "bugs": "https://github.com/amio/nace/issues",
   "dependencies": {
     "connect": "^3.4.1",
     "forever": "^0.15.2",
