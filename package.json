@@ -4,9 +4,10 @@
   "description": "node access logger.",
   "main": "index.js",
   "scripts": {
-    "fe": "forever",
-    "start": "forever start --minUptime 2000 --spinSleepTime 3000 forever.json",
-    "stop": "forever stop nace",
+    "start": "node .",
+    "festart": "forever start --minUptime 2000 --spinSleepTime 3000 forever.json",
+    "festop": "forever stop nace",
+    "list": "forever list",
     "test": "echo \"Error: no test specified\""
   },
   "license": "MIT",
@@ -16,7 +17,7 @@
   "bugs": "https://github.com/amio/nace/issues",
   "dependencies": {
     "connect": "^3.4.1",
-    "forever": "^0.15.2",
+    "forever-monitor": "^1.7.0",
     "minimist": "^1.2.0",
     "morgan": "^1.7.0"
   },
