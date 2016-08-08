@@ -33,6 +33,15 @@ switch (argv._[0]) {
 
 function startNace () {
 
+  try {
+    const pid = fs.readFileSync(pidFile, 'utf-8')
+    if (checkProcess(pid)) {
+      console.log('\x1b[31;1m✗\x1b[0m nace is running. '
+      + 'Try `nace stop` before starting new nace server.')
+      return false
+    }
+  } catch (e) {}
+
   // clean logfile
   fs.writeFileSync(logFile, '')
 
@@ -64,6 +73,7 @@ function stopNace () {
   try {
     const pid = fs.readFileSync(pidFile, 'utf-8')
     process.kill(pid)
+    console.log('\x1b[32;1m✗\x1b[0m nace stopped.')
   } catch (e) {
     process.exit(1)
   }
@@ -78,7 +88,21 @@ function checkNace () {
     return true
   }
   catch (err) {
-    console.log('\x1b[31;1mx\x1b[0m nace is not running.')
+    console.log('\x1b[31;1m✗\x1b[0m nace is not running.')
+    return false
+  }
+}
+
+function checkProcess (pid) {
+  if (!pid) {
+    return false
+  }
+
+  try {
+    process.kill(pid, 0)
+    return true
+  }
+  catch (err) {
     return false
   }
 }
