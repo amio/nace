@@ -2,7 +2,11 @@
   "name": "nace",
   "version": "0.2.0",
   "description": "node access logger.",
+  "preferGlobal": true,
   "main": "index.js",
+  "bin": {
+    "nace": "./cli/bin"
+  },
   "scripts": {
     "start": "node .",
     "festart": "forever start --minUptime 2000 --spinSleepTime 3000 forever.json",
@@ -17,7 +21,6 @@
   "bugs": "https://github.com/amio/nace/issues",
   "dependencies": {
     "connect": "^3.4.1",
-    "forever-monitor": "^1.7.0",
     "minimist": "^1.2.0",
     "morgan": "^1.7.0"
   },
