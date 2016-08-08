@@ -73,7 +73,7 @@ function stopNace () {
   try {
     const pid = fs.readFileSync(pidFile, 'utf-8')
     process.kill(pid)
-    console.log('\x1b[32;1m✗\x1b[0m nace stopped.')
+    console.log('\x1b[32;1m✓\x1b[0m nace stopped.')
   } catch (e) {
     process.exit(1)
   }
