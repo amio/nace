@@ -18,6 +18,9 @@ switch (argv._[0]) {
   case 'stop':
     stopNace()
     break
+  case 'check':
+    checkNace()
+    break
   default:
     help.printHelp()
 }
@@ -31,23 +34,44 @@ function startNace () {
   const errFD = fs.openSync(logFile, 'a')
 
   // start the engine
-  const child = spawn(process.argv[0], [naceIndex], {
+  const child = spawn(process.argv[0], [naceIndex, '-p', '3400'], {
     detached: true,
     stdio: ['ipc', outFD, errFD]
   })
   child.unref()
 
-  // pidfile
-  fs.writeFileSync(pidFile, child.pid)
-
-  console.log(child.pid, logFile)
+  child.on('message', msg => {
+    switch (msg) {
+      case 'success':
+        console.log('\x1b[32;1m✓\x1b[0m nace started.')
+        fs.writeFileSync(pidFile, child.pid)
+        break;
+      default:
+        console.log("\x1b[41;30m ERR \x1b[0m", msg)
+    }
+    process.exit()
+  })
 }
 
 function stopNace () {
-  const pkill = require('child_process').spawnSync('pkill', ['-F', pidFile], {
-    timeout: 1000
-  })
-  process.exit(pkill.status)
+  try {
+    const pid = fs.readFileSync(pidFile, 'utf-8')
+    process.kill(pid)
+  } catch (e) {
+    process.exit(1)
+  }
+  process.exit()
 }
 
-process.exit()
+function checkNace () {
+  try {
+    const pid = fs.readFileSync(pidFile, 'utf-8')
+    process.kill(pid, 0)
+    console.log('\x1b[32;1m✓\x1b[0m nace is running.')
+    return true
+  }
+  catch (err) {
+    console.log('\x1b[31;1mx\x1b[0m nace is not running.')
+    return false
+  }
+}

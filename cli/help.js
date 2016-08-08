@@ -7,20 +7,13 @@ const helpText = `
 
   Commands
 
-    start                 Start nace server.
+    start               Start nace server.
+    stop                Stop nace server.
+    check               Check if nace running.
 
     Options
 
-    -s, --suffix <suffix> Save to a new file with <suffix>('submod' by default).
-    -f, --force           Save to original file.
-
-    Examples
-
-      # Decrease subtitle delay by 134.7 seconds:
-      $ submod sync *S5E01*.ass :-134.7
-
-      # Increase subtitle delay by 11.1 seconds:
-      $ submod sync *S5E01*.srt :+11.1
+    -p, --port <port>   Port to listening (default: 3300).
 `
 
 module.exports = {

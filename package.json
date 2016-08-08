@@ -8,10 +8,6 @@
     "nace": "./cli/bin"
   },
   "scripts": {
-    "start": "node .",
-    "festart": "forever start --minUptime 2000 --spinSleepTime 3000 forever.json",
-    "festop": "forever stop nace",
-    "list": "forever list",
     "test": "echo \"Error: no test specified\""
   },
   "license": "MIT",

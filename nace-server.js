@@ -5,13 +5,14 @@ const path = require('path')
 const fs = require('fs')
 
 function launchServer (args, callback) {
+  const logDir = args.logDir || process.cwd()
   return new Promise(function(resolve, reject) {
     const app = connect()
 
     // setup the logger
     app.use(morgan('combined', {
       immediate: true,
-      stream: (new AccessLog).stream
+      stream: (new AccessLog(logDir)).stream
     }))
     app.use(function(req, res){ res.end() })
 
@@ -21,11 +22,11 @@ function launchServer (args, callback) {
   })
 }
 
-function AccessLog () {
+function AccessLog (logDir) {
   const that = this
   function updateAccessLogStream () {
     const timestamp = (new Date).toISOString().replace(/T.*/, '')
-    const logfile = path.join(__dirname, `access-${timestamp}.log`)
+    const logfile = path.join(logDir, `access-${timestamp}.log`)
     that.stream = fs.createWriteStream(logfile, {flags: 'a'})
   }
   setInterval(updateAccessLogStream, 60000)
