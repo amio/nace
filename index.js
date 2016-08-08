@@ -16,7 +16,7 @@ naceServer.start({
   process.send && process.send('success')
   console.log(`\x1b[32;1m✓\x1b[0m nace is running at http://localhost:${port}/`)
 }).catch(err => {
-  process.send && process.send('fail:' + err.code)
+  process.send && process.send(err.code)
   switch (err.code) {
     case 'EADDRINUSE':
       console.log(`\n\x1b[41;30m ERR \x1b[0m Port ${err.port} is in used.\n`)

@@ -4,8 +4,14 @@ const fs = require('fs')
 const path = require('path')
 const homedir = require('os').homedir()
 const spawn = require('child_process').spawn
-const argv = require('minimist')(process.argv.slice(2))
 const help = require('./help.js')
+const argv = require('minimist')(process.argv.slice(2), {
+  alias: {
+    h: 'help',
+    v: 'version',
+    p: 'port'
+  }
+})
 
 const pidFile = path.join(homedir, '.nace.pid')
 const logFile = path.join(homedir, '.nace.log')
@@ -34,7 +40,8 @@ function startNace () {
   const errFD = fs.openSync(logFile, 'a')
 
   // start the engine
-  const child = spawn(process.argv[0], [naceIndex, '-p', '3400'], {
+  const port = argv.port || '3300'
+  const child = spawn(process.argv[0], [naceIndex, '-p', port], {
     detached: true,
     stdio: ['ipc', outFD, errFD]
   })
