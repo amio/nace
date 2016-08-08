@@ -3,16 +3,17 @@
 ### usage
 
 ```bash
-# clone this repository
-$ git clone https://github.com/amio/nace.git
-$ cd nace
+# install
+$ npm i -g nace
 
 # start
-$ npm start
+$ nace start
+# or
+$ nace start -p 3400
 
 # stop
-$ npm stop
+$ nace stop
 
 # check server state through forever
-$ npm run fe -- list
+$ nace check
 ```
