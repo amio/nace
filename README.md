@@ -1,5 +1,7 @@
 # nace: node access logger [WIP]
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/amio/nace.svg)](https://greenkeeper.io/)
+
 ### usage
 
 ```bash
